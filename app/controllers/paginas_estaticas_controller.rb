@@ -1,7 +1,10 @@
 class PaginasEstaticasController < ApplicationController
   def home
-    open("http://www.ruby-lang.org/") {|f|
-      f.each_line {|line| @dados << line}
-    }
+    require 'open-uri'
+    url = URI.parse('http://vangoghletters.org/vg/letters/RM01/translation.html')
+    open(url) do |http|
+        response = http.read
+        @dados = "response: #{response.inspect}"
+    end
   end
 end
